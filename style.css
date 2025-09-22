@@ -1,0 +1,201 @@
+:root{
+  --border:2px;
+  --radius:9999px;
+  --header-bg:#fff;
+  --text:#111;
+  --muted:#f2f2f2;
+  --logo-h:110px;
+  --header-pad-y:8px;
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--text);
+  background:#ff0096;
+  line-height:1.6;
+}
+
+h2{
+  color:#ffff00;
+  font-size:xx-large;
+}
+
+/* ---------- Header ---------- */
+.site-header{
+  position:sticky; top:0; z-index:1000;
+  background:var(--header-bg);
+  box-shadow:0 1px 0 rgba(0,0,0,.06);
+}
+
+.header-inner{
+  position:relative;
+  display:flex; align-items:center;
+  justify-content:flex-start;
+  padding: var(--header-pad-y) 16px;
+  min-height: calc(var(--logo-h) + var(--header-pad-y)*2);
+  background:#ff0096;
+}
+
+.logo{
+  height:var(--logo-h);
+  width:auto;
+}
+
+/* Nav mittig */
+.pill-nav{
+  position:absolute;
+  left:50%; top:50%;
+  transform:translate(-50%,-50%);
+  max-width:min(1100px,92vw);
+}
+
+.pill{
+  position:relative;
+  display:inline-flex; align-items:center;
+  gap:clamp(.75rem,2vw,2rem);
+  padding:8px 10px;
+  border:var(--border) solid #000;
+  border-radius:var(--radius);
+  background:#fff;
+  overflow-x:auto; scrollbar-width:none;
+}
+.pill::-webkit-scrollbar{ display:none; }
+
+.pill .slider{
+  position:absolute; z-index:0;
+  top:4px; bottom:4px; left:0; width:0;
+  border-radius:var(--radius);
+  background:#000;
+  transition:transform .35s, width .35s;
+}
+
+.pill a{
+  position:relative; z-index:1;
+  text-decoration:none; color:#000;
+  font-weight:700;
+  padding:10px 16px;
+  border-radius:var(--radius);
+  white-space:nowrap;
+  transition:color .3s ease, background .2s ease;
+}
+.pill a.active{ color:#fff; }
+.pill a:hover{ background:rgba(0,0,0,.06); }
+
+/* ---------- Hero ---------- */
+.hero{
+  display:flex; justify-content:center; align-items:center;
+  text-align:center;
+  height:100vh;
+  position:relative;
+}
+
+.hero-content{ max-width:900px; margin:auto; }
+
+.hero h1{ margin:0 0 12px; line-height:1.1; }
+.hero .line1{
+  display:inline-block;
+  font-weight:800;
+  font-size:clamp(3.1rem, 9.4vw, 5.5rem);
+  color:#ffff00;
+}
+.hero .line2{
+  display:inline-block;
+  font-weight:800;
+  font-size:clamp(2.34rem, 7.3vw, 3.9rem);
+  color:#ffff00;
+}
+.hero h2{
+  margin:6px 0 20px;
+  font-size:clamp(1.1rem, 2.6vw, 1.6rem);
+  font-weight:600;
+  color:#fff;
+}
+
+/* Pfeil unten */
+.scroll-down{
+  position:absolute;
+  bottom:20px; left:50%;
+  transform:translateX(-50%);
+  display:inline-block;
+  animation:bounce 2s infinite;
+}
+.scroll-down img{
+  width: 60px; height:auto;
+}
+@keyframes bounce{
+  0%,100%{ transform:translate(-50%,0); }
+  50%{ transform:translate(-50%,10px); }
+}
+
+/* ---------- Video ---------- */
+.video-section{
+  padding:40px 16px;
+  display:flex; justify-content:center;
+}
+.video-container{
+  position:relative;
+  aspect-ratio:16/9;
+  background:#000;
+  border-radius:16px;
+  overflow:hidden;
+  width:100%;
+  max-width:1200px;
+}
+.video-container iframe{
+  position:absolute; inset:0;
+  width:100%; height:100%; border:0;
+}
+
+/* ---------- Sections ---------- */
+.section{
+  scroll-margin-top: calc(var(--logo-h) + 40px);
+  padding: clamp(48px, 6vw, 80px) 16px;
+  max-width:1100px; margin:0 auto; min-height:70vh;
+}
+
+h2{ margin:0 0 1rem; }
+
+/* Programm */
+.programm-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:24px;
+}
+.day{ background:var(--muted); padding:24px; border-radius:12px; }
+.day h3{ margin-top:0; margin-bottom:8px; font-size:1.3rem; }
+.day h4{ margin:8px 0; font-size:1.1rem; font-weight:600; }
+.movie{ margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid #ccc; }
+.movie:last-child{ border-bottom:none; margin-bottom:0; padding-bottom:0; }
+.movie .time{ font-weight:bold; margin:0 0 4px; }
+
+/* Map */
+.map-container{ border-radius:16px; overflow:hidden; background:#ddd; }
+.map-container iframe{ width:100%; height:min(60vh,480px); border:0; }
+
+/* Footer */
+.site-footer{
+  text-align:center; padding:32px 16px;
+  color:#ffff00; border-top:1px solid #eee;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1024px){
+  :root{ --logo-h:96px; }
+}
+@media (max-width:780px){
+  :root{ --logo-h:76px; }
+  .pill-nav{
+    position:static; transform:none;
+    margin:8px auto 0;
+    display:flex; justify-content:center;
+  }
+  .header-inner{ flex-direction:column; align-items:center; gap:8px; }
+}
+@media (max-width:420px){
+  :root{ --logo-h:64px; }
+  .pill a{ padding:8px 12px; font-weight:800; }
+}
