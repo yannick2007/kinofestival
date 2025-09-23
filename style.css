@@ -199,3 +199,98 @@ h2{ margin:0 0 1rem; }
   :root{ --logo-h:64px; }
   .pill a{ padding:8px 12px; font-weight:800; }
 }
+
+
+
+
+
+
+
+/* Hamburger Button */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.hamburger span {
+  display: block;
+  height: 3px;
+  background: #111;
+  border-radius: 2px;
+  transition: all .3s ease;
+}
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Mobile Menü */
+@media (max-width: 780px){
+  .header-inner {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  .logo { order: 2; }
+  .hamburger {
+    display: flex;
+    order: 3;
+    margin-left: auto;
+  }
+  .pill-nav {
+    position: absolute;
+    top: 100%;
+    right: 16px;
+    background: #fff;
+    border: 2px solid #000;
+    border-radius: 12px; /* rechteckig mit soften Ecken */
+    padding: 12px;
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.15);
+    min-width: 180px;
+    text-align: left;
+    z-index: 999;
+  }
+  .pill-nav.open {
+    display: flex;
+  }
+  .pill {
+    flex-direction: column;
+    gap: 6px;
+    border: none;
+    background: transparent;
+    padding: 0;
+  }
+  .pill .slider { display: none; }
+  .pill a {
+    padding: 10px 14px;
+    font-weight: 700;
+    border-radius: 8px;
+    color: #000;
+    text-decoration: none;
+    transition: background .2s;
+  }
+  .pill a:hover {
+    background: rgba(0,0,0,.05);
+  }
+  .pill a.active {
+    background: #000;
+    color: #fff;
+  }
+}
+
+

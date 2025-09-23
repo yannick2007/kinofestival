@@ -6,17 +6,23 @@
   <title>Kinofestival Zürich</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/x-icon" href="assets/favicon.svg">
-  <meta property = "og:title" content = "And Acion!" /> 
-  <meta property = "og:description" content = "Kinofestival Website by Yannick" /> 
-  <meta property = "og:url" content = "https://and-action.lol" /> 
-  <meta property = "og:image" content= ""  /> 
-
+  <meta property="og:title" content="And Action!" /> 
+  <meta property="og:description" content="Kinofestival Website by Yannick" /> 
+  <meta property="og:url" content="https://and-action.lol" /> 
+  <meta property="og:image" content="" /> 
 </head>
 <body>
   <!-- Header -->
   <header class="site-header">
     <div class="header-inner">
       <img src="assets/logo_white.svg" alt="Festival Logo" class="logo" />
+      
+      <!-- Hamburger nur Mobile -->
+      <button class="hamburger" aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- Navigation -->
       <nav class="pill-nav" aria-label="Hauptnavigation">
         <div class="pill" id="pill">
           <a href="#trailer" class="active">Home</a>
@@ -37,7 +43,6 @@
         <span class="line2">Kinofestival Zürich</span>
       </h1>
       <h2>XX.XX – XX.XX</h2>
-      <!-- Pfeil -->
       <a href="#video" class="scroll-down">
         <img src="assets/arrow.png" alt="Scroll Down">
       </a>
@@ -55,7 +60,6 @@
   <section id="programm" class="section">
     <h2>Programm</h2>
     <div class="programm-grid">
-
       <!-- Montag -->
       <article class="day">
         <h3>Montag – Schweizer-Abend</h3>
@@ -145,7 +149,6 @@
           <p>Hauptdarsteller: Robert Pattinson (Bruce Wayne / Batman), Zoë Kravitz, Paul Dano</p>
         </div>
       </article>
-
     </div>
   </section>
 
@@ -153,9 +156,8 @@
   <section id="location" class="section">
     <h2>Festivalgelände</h2>
     <div class="map-container">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10811.067300392719!2d8.5256369!3d47.3579502!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479009f1d5a785e1%3A0xedb469258c9a3617!2sSihlcity!5e0!3m2!1sde!2sch!4v1758545727878!5m2!1sde!2sch" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." width="600" height="450" style="border:0;" allowfullscreen loading="lazy"></iframe>
     </div>
-    <p></p>
   </section>
 
   <!-- Infos -->
@@ -170,78 +172,90 @@
   </footer>
 
   <!-- Script -->
-  <script>
-  const pill = document.getElementById('pill');
-  const links = pill.querySelectorAll('a');
-  const slider = pill.querySelector('.slider');
+<script>
+const pill = document.getElementById('pill');
+const links = pill.querySelectorAll('a');
+const slider = pill.querySelector('.slider');
+const hamburger = document.querySelector('.hamburger');
+const nav = document.querySelector('.pill-nav');
 
-  function activate(link) {
-    if (!link) return;
-    links.forEach(l => l.classList.toggle('active', l === link));
-    const left = link.offsetLeft;
-    const width = link.offsetWidth;
-    slider.style.width = width + 'px';
-    slider.style.transform = `translateX(${left}px)`;
-  }
+function activate(link) {
+  if (!link) return;
+  links.forEach(l => l.classList.toggle('active', l === link));
+  const left = link.offsetLeft;
+  const width = link.offsetWidth;
+  slider.style.width = width + 'px';
+  slider.style.transform = `translateX(${left}px)`;
+}
 
-  function initSlider() {
-    const current = pill.querySelector('a.active') || links[0];
-    activate(current);
-  }
-  document.addEventListener('DOMContentLoaded', initSlider);
+function initSlider() {
+  const current = pill.querySelector('a.active') || links[0];
+  activate(current);
+}
+document.addEventListener('DOMContentLoaded', initSlider);
 
-  // --- Scroll-Spy ---
-  const sections = document.querySelectorAll("section[id]");
-  let spyEnabled = true; // Kontrolle, ob Scroll-Spy reagieren darf
+// --- Scroll-Spy ---
+const sections = document.querySelectorAll("section[id]");
+let spyEnabled = true;
 
-  window.addEventListener("scroll", () => {
-    if (!spyEnabled) return; // Klick-Sperre aktiv
-    let currentId = "";
-    const scrollY = window.pageYOffset;
+function updateScrollSpy() {
+  if (!spyEnabled) return;
+  let currentId = "";
+  const scrollY = window.pageYOffset;
 
-    sections.forEach((sec, i) => {
-      const offset = sec.offsetTop - 120;
-      const height = sec.offsetHeight;
-
-      if (scrollY >= offset && scrollY < offset + height) {
-        currentId = sec.getAttribute("id");
-      }
-
-      // letzte Section erzwingen, wenn ganz unten
-      if (i === sections.length - 1) {
-        if (window.innerHeight + scrollY >= document.body.offsetHeight - 50) {
-          currentId = sec.getAttribute("id");
-        }
-      }
-    });
-
-    if (currentId) {
-      const activeLink = [...links].find(l => l.getAttribute("href") === "#" + currentId);
-      if (activeLink) activate(activeLink);
+  sections.forEach((sec, i) => {
+    const offset = sec.offsetTop - 150; // Abstand für Header
+    const height = sec.offsetHeight;
+    if (scrollY >= offset && scrollY < offset + height) {
+      currentId = sec.getAttribute("id");
+    }
+    if (i === sections.length - 1 && window.innerHeight + scrollY >= document.body.offsetHeight - 5) {
+      currentId = sec.getAttribute("id");
     }
   });
 
-  // --- Klick: Scrollen + Bubble sofort + Spy kurz ausschalten ---
-  links.forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const targetId = link.getAttribute("href");
-      const target = document.querySelector(targetId);
-      if (target) {
-        spyEnabled = false;        // Scroll-Spy aus
-        activate(link);            // sofort Bubble setzen
-        target.scrollIntoView({ behavior: "smooth" });
-        setTimeout(() => {         // nach 1s Scroll-Spy wieder an
-          spyEnabled = true;
-        }, 1000);
-      }
-    });
-  });
+  if (currentId) {
+    const activeLink = [...links].find(l => l.getAttribute("href") === "#" + currentId);
+    if (activeLink) activate(activeLink);
+  }
+}
 
-  window.addEventListener('resize', () => {
-    const current = pill.querySelector('a.active') || links[0];
-    activate(current);
+window.addEventListener("scroll", updateScrollSpy);
+
+// --- Klick-Handling ---
+links.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const targetId = link.getAttribute("href");
+    const target = document.querySelector(targetId);
+    if (target) {
+      spyEnabled = false;
+      activate(link); // sofort Bubble
+      target.scrollIntoView({ behavior: "smooth" });
+
+      // Warte bis Scroll fertig, dann Spy wieder aktivieren
+      setTimeout(() => {
+        spyEnabled = true;
+        updateScrollSpy();
+      }, 800);
+
+      // Menü schließen (Mobile)
+      nav.classList.remove('open');
+      hamburger.classList.remove('open');
+    }
   });
+});
+
+// --- Hamburger Toggle ---
+hamburger.addEventListener('click', () => {
+  nav.classList.toggle('open');
+  hamburger.classList.toggle('open');
+});
+
+window.addEventListener('resize', () => {
+  const current = pill.querySelector('a.active') || links[0];
+  activate(current);
+});
 </script>
 </body>
 </html>
