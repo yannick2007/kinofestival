@@ -15,7 +15,7 @@
   <!-- Header -->
   <header class="site-header">
     <div class="header-inner">
-        <a href="https://and-action.lol">
+        <a href="#trailer">
       <img src="assets/logo_white.svg" alt="Festival Logo" class="logo" />
       </a>
       
@@ -258,6 +258,20 @@ window.addEventListener('resize', () => {
   const current = pill.querySelector('a.active') || links[0];
   activate(current);
 });
+
+window.addEventListener("load", () => {
+  const trailer = document.querySelector("#trailer");
+  if (trailer) {
+    trailer.scrollIntoView({ behavior: "instant", block: "start" });
+  }
+
+  // Bubble direkt auf Home setzen
+  const homeLink = document.querySelector('.pill a[href="#trailer"]');
+  if (homeLink) {
+    activate(homeLink);
+  }
+});
+
 </script>
 </body>
 </html>
