@@ -169,6 +169,16 @@
     <p>Weitere Infos …</p>
   </section>
 
+<!-- Poster -->
+<section id="poster" class="section">
+  <h2>Festivalplakat</h2>
+  <div class="poster-wrapper">
+    <img src="assets/plakat.png" alt="Festivalplakat">
+  </div>
+</section>
+
+
+
   <footer class="site-footer">
     <p>&copy; 2025 Kinofestival Zürich</p>
   </footer>
@@ -224,7 +234,7 @@ function updateScrollSpy() {
 
 window.addEventListener("scroll", updateScrollSpy);
 
-// --- Klick-Handling ---
+
 links.forEach(link => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
@@ -232,23 +242,23 @@ links.forEach(link => {
     const target = document.querySelector(targetId);
     if (target) {
       spyEnabled = false;
-      activate(link); // sofort Bubble
+      activate(link); 
       target.scrollIntoView({ behavior: "smooth" });
 
-      // Warte bis Scroll fertig, dann Spy wieder aktivieren
+      
       setTimeout(() => {
         spyEnabled = true;
         updateScrollSpy();
       }, 800);
 
-      // Menü schließen (Mobile)
+     
       nav.classList.remove('open');
       hamburger.classList.remove('open');
     }
   });
 });
 
-// --- Hamburger Toggle ---
+
 hamburger.addEventListener('click', () => {
   nav.classList.toggle('open');
   hamburger.classList.toggle('open');
@@ -271,7 +281,6 @@ window.addEventListener("load", () => {
     activate(homeLink);
   }
 });
-
 </script>
 </body>
 </html>
