@@ -234,7 +234,7 @@ h2{ margin:0 0 1rem; }
 
   .movie-poster {
     order: 1;
-    flex: 0 0 160px; /* feste Breite = saubere linke Spalte */
+    flex: 0 0 160px; 
     justify-content: flex-start;
   }
 
@@ -251,17 +251,17 @@ h2{ margin:0 0 1rem; }
 
 
 
-/* Map */
+
 .map-container{ border-radius:16px; overflow:hidden; background:#ddd; }
 .map-container iframe{ width:100%; height:min(60vh,480px); border:0; }
 
-/* Footer */
+
 .site-footer{
   text-align:center; padding:32px 16px;
   color:#ffff00; border-top:1px solid #eee;
 }
 
-/* ---------- Responsive ---------- */
+
 @media (max-width:1024px){
   :root{ --logo-h:96px; }
 }
@@ -285,7 +285,7 @@ h2{ margin:0 0 1rem; }
 
 
 
-/* Hamburger Button */
+
 .hamburger {
   display: none;
   flex-direction: column;
@@ -314,7 +314,7 @@ h2{ margin:0 0 1rem; }
   transform: rotate(-45deg) translate(6px, -6px);
 }
 
-/* Mobile Menü */
+
 @media (max-width: 780px){
   .header-inner {
     flex-direction: row;
@@ -334,7 +334,7 @@ h2{ margin:0 0 1rem; }
     right: 16px;
     background: #fff;
     border: 2px solid #000;
-    border-radius: 12px; /* rechteckig mit soften Ecken */
+    border-radius: 12px; 
     padding: 12px;
     display: none;
     flex-direction: column;
@@ -373,7 +373,7 @@ h2{ margin:0 0 1rem; }
 }
 
 
-/* Poster Bereich */
+
 .poster-wrapper {
   display: flex;
   justify-content: center;
@@ -400,7 +400,7 @@ h2{ margin:0 0 1rem; }
 }
 
 
-/* Footer neu mit Sponsoren */
+
 .site-footer {
   background: #fff;
   border-top: 1px solid #eee;
@@ -429,18 +429,18 @@ h2{ margin:0 0 1rem; }
 }
 
 .sponsors img {
-  height: 40px;   /* Logos schön klein und länglich */
+  height: 40px;  
   width: auto;
   object-fit: contain;
-  filter: grayscale(100%); /* edel in grau */
+  filter: grayscale(100%); 
   transition: filter 0.3s ease;
 }
 
 .sponsors img:hover {
-  filter: grayscale(0%); /* beim Hover farbig */
+  filter: grayscale(0%); 
 }
 
-/* Mobile Anpassung */
+
 @media (max-width: 780px) {
   .footer-inner {
     flex-direction: column;
@@ -457,4 +457,31 @@ h2{ margin:0 0 1rem; }
   .sponsors img {
     height: 32px;
   }
+}
+
+
+
+.poster-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 12px;         
+  padding: 10px;           
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  max-width: 900px;           
+  margin: 0 auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.poster-wrapper:hover {
+  transform: scale(1.01);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+
+.poster-wrapper img {
+  width: 100%;                 
+  height: auto;                
+  border-radius: 8px;
+  display: block;
 }
